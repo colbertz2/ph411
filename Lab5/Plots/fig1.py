@@ -22,15 +22,20 @@ indices = range(0,14)
 selectBase = np.take(baseCurrent, indices)
 selectCollector = np.take(collectorCurrent, indices)
 selectGain, selectOffset = np.polyfit(selectBase, selectCollector, 1)
-u = np.arange(min(baseCurrent), max(baseCurrent))
+u = x
 v = (selectGain * u) + selectOffset
 
+# Make another curve based on the gain measured by the DMM
+dmmGain = 112
+w = x
+z = dmmGain * w * 10**(-3)
 
 # Plot Ib on x, Ic on y
 plt.figure()
-plt.plot(baseCurrent, collectorCurrent, 'ro')
-plt.plot(x, y)
-plt.plot(u, v, 'r')
+plt.plot(baseCurrent, collectorCurrent, 'ro')   # Original data
+plt.plot(x, y)  # Theory curve on original data
+plt.plot(u, v, 'r')     # Theory curve on selective data
+plt.plot(w, z, 'g')     # Theory curve on DMM gain
 plt.xlabel('Base Current ' + r'$\mu A$')
 plt.ylabel('Collector Current ' + r'$mA$')
 plt.title("2N9304 Transistor Gain")
