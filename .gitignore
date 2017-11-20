@@ -1,0 +1,11 @@
+# Apple metadata
+.DS_STORE
+
+# LaTeX junk that we don't need
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+
+.vscode
