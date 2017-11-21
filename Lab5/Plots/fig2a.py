@@ -20,10 +20,14 @@ smoothFxn = np.poly1d(np.polyfit(time, mathFxn, 30))
 
 # Plot the stuff
 plt.figure()
-plt.plot(time, mathFxn, 'r,')
-plt.plot(time, smoothFxn(time))
+plt.plot(time * 10**3, mathFxn, 'r,')
+# plt.plot(time, smoothFxn(time))
 # plt.plot(time, inputSignal)
 # plt.plot(time, outputSignal, 'g')
 plt.ylim(-2.5, 2.5)
+plt.grid(True)
+plt.title("Input/Output Signal Difference")
+plt.xlabel("Time (ms)")
+plt.ylabel("Amplitude (V)")
 
 plt.show()
