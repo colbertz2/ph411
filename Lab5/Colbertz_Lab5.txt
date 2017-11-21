@@ -73,12 +73,16 @@ In this case, if I wanted to characterize this transistor for a larger project, 
 
 ## INTRODUCTION ##
 
-In this part of the lab, 
+In the second part of this lab, we used an emitter-follower circuit to examine the bias of our transistor, and how that affects a given input signal. We also used a couple of more complicated circuits to look at different kinds of signal "clipping" that can happen, and the limiting factors that lead to that clipping.
+
+Bias in a transistor is the current or voltage necessary for the transistor to operate normally--that is, for the transistor to perform consistently as a switch or current-limiting device. In this case we focused on the base bias, a voltage applied to the base of the transistor that induces current flow between the collector and emitter.
+
+Signal clipping took on a few different forms in this lab. For one circuit, all the negative portions of the signal were completely suppressed. For another, peaks and troughs in the signal appeared to be trimmed from the middle, with a flat region mid-way up a wave. We'll examine these waveforms more closely in the Results section.
 
 
 ## EXPERIMENTAL ##
 
-    Stuff.
+
 
 
 ## RESULTS ##
