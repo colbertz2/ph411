@@ -99,7 +99,15 @@ No new theory applies to this part of the lab. Our observations mostly relied on
 
 For the emitter-follower circuit, we found that our input signal had to have a peak-to-peak voltage of at least 700 MILLIVOLTS. Below that amplitude, there was no measurable output signal.
 
+The math function of the oscilloscope was particularly useful for showing the difference between the input and output signals. We were able to see, as we increased the amplitude of the input signal, that the output signal is always clipped at the same amplitude, around 700 MILLIVOLTS.
 
+FIGURE: fig2a.png
+
+Using circuit FIGURE: c-2bl.png our output signal looked exactly like the input signal, shifted down about 600 MILLIVOLTS (voltage offset). With a scope probe we found that the output signal was offset like this after crossing the 5 KILOHM resistor on the transistor base. We also found that by changing the -15 VOLTS near the transistor emitter to ground, the output signal was clipped similar to the circuit FIGURE: c-2.png
+
+SOMETHING ABOUT THE OTHER CIRCUIT???
+
+This shows that the emitter and collector voltages affect the way a signal is clipped when passing through a transistor. 
 
 
 ## CONCLUSION ##
