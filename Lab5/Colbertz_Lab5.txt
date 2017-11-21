@@ -10,22 +10,58 @@
 
 ## INTRODUCTION ##
 
-    Stuff.
+Transistors are active elements--they control current by means of a "base" signal, separate from the main signal passing through. Junctions between semiconductors make this possible, where electron-hole pairs come together to form a charge imbalance called the "depletion zone," effectively a barrier which prevents electrons from flowing across the junction.
+
+By applying some current to the base of the transistor, connected to the middle semiconductor, we suppress the depletion zones enough to open a kind of channel for current to flow through.
+
+In addition to acting as electronic switches, starting and stopping current with a small base signal, transistors come with some current gain--by which the input signal is amplified with a still small base singal.
+
+In part 1 of this lab, we examine this current gain property of an npn transistor, by two different methods.
 
 
 ## EXPERIMENTAL ##
 
-    Stuff.
+For this part of the lab, we used a 2N3904 npn transistor. Before looking at the current gain, we used a digital multimeter on the diode setting to show that a transistor behaves like two diodes. We were able to measure voltage drops across the "diodes" on either side of the transistor (base-emitter and collector-base drops) as well as the drop across the entire transistor (collector-emitter drop).
+
+Next, as a point of comparison for our current gain, we used the DMM on the transistor gain setting to measure our transistor on its own.
+
+Finally, for a little more comprehensive look at the behavior of the transistor over a range of currents, we built the transistor into a circuit and measured the base and collector currents individually.
+
+FIGURE: Circuit c-1c.png
+
+In the above circuit, we used a 1 MOHM potentiometer to manually adjust the base current, and compared that to the collector current over many samples (keeping the respective input voltages at the collector and base constant throughout). Our theoretical model for the current gain says:
+
+MATH: I_c = Beta I_b
+
+So, we expect a plot of I_c versus I_b to be a line with slope Beta, where Beta is the current gain of the transistor.
 
 
 ## RESULTS ##
 
-    Stuff.
+In measuring the "diode" drop voltages across parts of the transistor, we found the following
+
+TABLE:  Base-Emitter: 0.665 V
+        Collector-Base: 0.646 V
+        Emitter-Collector: 0 V
+
+The first two measurements showed us that current flows one way through each side of the transistor, just like current flows one way through a diode. The third showed the current-controlling function of the transistor--without a base current, no current flows between the collector and emitter.
+
+FIGURE: fig1.png
+
+With the DMM on transistor mode, we measured a current gain BETA = 112, shown in green on Figure FIG1.PNG.
+
+Our manually measured gain was incredibly consistent, following a distinct line until about 60 MICROAMPS base current. At that point it curved away and became shallow--I suspect that as we approached the minimum resistance through our potentiometer, current through the transistor was limited by something on the collector, though I was not able to prove that with Kirchoff analysis of the circuit.
+
+I added a couple of different linear fits to the plot--the line in blue represents a linear fit across all of the data. The line in red represents a linear fit across a select range of data, excluding the points above 60 MICROAMPS base current.
+
+The inclusive linear fit represents a current gain of 144, and the exclusive linear fit represents a current gain of 167. I haven't found a good explanation for the difference between these values and the one measured by the DMM initially, but they seem to be reasonably close to each other.
 
 
 ## CONCLUSION ##
 
-    Stuff.
+There are clear differences between the values measured for current gain in this part of the lab, but it seems reasonable to assume that measurements exclusively made by the DMM are not the most accurate.
+
+In this case, if I wanted to characterize this transistor for a larger project, I would tend to choose the current gain found by making a linear fit in the region where the data appears to be linear. Then, at least it is clear what the current gain is for that region, and my larger circuit can be constrained to operate the transistor only in that region.
 
 
 ================================================================================
