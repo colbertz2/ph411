@@ -82,7 +82,17 @@ Signal clipping took on a few different forms in this lab. For one circuit, all 
 
 ## EXPERIMENTAL ##
 
+With the emitter-follower circuit, our input and output signals were connected to a common ground. We used a sine wave input, and slowly increased the amplitude of the input signal until we could measure an output signal with an oscilloscope. 
 
+Using the math functions on the oscilloscope, we found a waveform representing the difference between the input and output signals to illustrate the signal clipping in a qualitative way.
+
+FIGURE: c-2.png
+
+With our more complicated circuits, we looked for some limiting factors that lead to signal clipping. For either circuit, we did a lot of work with an oscilloscope probe to find voltage drop across individual elements, but ultimately found our best results by changing the emitter voltage and examining the resultant waveforms.
+
+FIGURE: c-2bL.png AND c-2bR.png
+
+No new theory applies to this part of the lab. Our observations mostly relied on simple Kirchoff analysis of circuits.
 
 
 ## RESULTS ##
