@@ -32,13 +32,15 @@ z = dmmGain * w * 10**(-3)
 
 # Plot Ib on x, Ic on y
 plt.figure()
-plt.plot(baseCurrent, collectorCurrent, 'ro')   # Original data
-plt.plot(x, y)  # Theory curve on original data
-plt.plot(u, v, 'r')     # Theory curve on selective data
-plt.plot(w, z, 'g')     # Theory curve on DMM gain
+plt.plot(baseCurrent, collectorCurrent, 'ro', label='Experimental Data')   # Original data
+plt.plot(x, y, label='Linear Fit')  # Theory curve on original data
+plt.plot(u, v, 'r', label='Selective Linear Fit')     # Theory curve on selective data
+plt.plot(w, z, 'g', label='DMM Gain')     # Theory curve on DMM gain
 plt.xlabel('Base Current ' + r'$\mu A$')
 plt.ylabel('Collector Current ' + r'$mA$')
 plt.title("2N9304 Transistor Gain")
+plt.legend(loc=4)
+plt.grid(True)
 # plt.tight_layout()
 
 plt.show()
