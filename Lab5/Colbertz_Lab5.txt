@@ -50,18 +50,20 @@ FIGURE: fig1.png
 
 With the DMM on transistor mode, we measured a current gain BETA = 112, shown in green on Figure FIG1.PNG.
 
-Our manually measured gain was incredibly consistent, following a distinct line until about 60 MICROAMPS base current. At that point it curved away and became shallow--I suspect that as we approached the minimum resistance through our potentiometer, current through the transistor was limited by something on the collector, though I was not able to prove that with Kirchoff analysis of the circuit.
+Our manually measured gain was incredibly consistent, following a distinct line until about 60 MICROAMPS base current. At that point it curved away and became shallow--By some simple analysis of the circuit, this appears to be a maximum for the collector current. 
+
+That final point lies at about 15 MILLIAMPS collector current. Through a 1k resistor, that current results in a 15 VOLT drop between V_CC and the collector. Not only is that the maximum voltage that can be passed to the collector, it causes the collector voltage to be 0, equal to the emitter voltage. This breaks one of the fundamental rules for normal operation of a transistor.
 
 I added a couple of different linear fits to the plot--the line in blue represents a linear fit across all of the data. The line in red represents a linear fit across a select range of data, excluding the points above 60 MICROAMPS base current.
 
-The inclusive linear fit represents a current gain of 144, and the exclusive linear fit represents a current gain of 167. I haven't found a good explanation for the difference between these values and the one measured by the DMM initially, but they seem to be reasonably close to each other.
+The inclusive linear fit represents a current gain of 144, and the exclusive linear fit represents a current gain of 167. I haven't found a good explanation for the difference between these values and the one measured by the DMM initially, but they seem to be reasonably close to each other (at least, within an order of magnitude).
 
 
 ## CONCLUSION ##
 
 There are clear differences between the values measured for current gain in this part of the lab, but it seems reasonable to assume that measurements exclusively made by the DMM are not the most accurate.
 
-In this case, if I wanted to characterize this transistor for a larger project, I would tend to choose the current gain found by making a linear fit in the region where the data appears to be linear. Then, at least it is clear what the current gain is for that region, and my larger circuit can be constrained to operate the transistor only in that region.
+In this case, if I wanted to characterize this transistor for a larger project, I would tend to choose the current gain found by making a linear fit in the region where the data appears to be linear. Then, at least it is clear what the current gain is for that region, and my larger circuit can be constrained to fit the parameters for normal operation of the transistor.
 
 
 ================================================================================
@@ -71,7 +73,7 @@ In this case, if I wanted to characterize this transistor for a larger project, 
 
 ## INTRODUCTION ##
 
-    Stuff.
+In this part of the lab, 
 
 
 ## EXPERIMENTAL ##
