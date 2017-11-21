@@ -97,7 +97,9 @@ No new theory applies to this part of the lab. Our observations mostly relied on
 
 ## RESULTS ##
 
-    Stuff.
+For the emitter-follower circuit, we found that our input signal had to have a peak-to-peak voltage of at least 700 MILLIVOLTS. Below that amplitude, there was no measurable output signal.
+
+
 
 
 ## CONCLUSION ##
