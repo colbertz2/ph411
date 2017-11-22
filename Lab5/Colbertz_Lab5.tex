@@ -18,7 +18,7 @@
 \section{Transistor Basics}
 \subsection{Introduction}
 
-Transistors are active elements--they control current by means of a \"base\" signal, separate from the main signal passing through. Junctions between semiconductors make this possible, where electron-hole pairs come together to form a charge imbalance called the \"depletion zone,\" effectively a barrier which prevents electrons from flowing across the junction.\\
+Transistors are active elements--they control current by means of a "base" signal, separate from the main signal passing through. Junctions between semiconductors make this possible, where electron-hole pairs come together to form a charge imbalance called the "depletion zone," effectively a barrier which prevents electrons from flowing across the junction.\\
 
 By applying some current to the base of the transistor, connected to the middle semiconductor, we suppress the depletion zones enough to open a kind of channel for current to flow through.\\
 
@@ -35,7 +35,7 @@ In part 1 of this lab, we examine this current gain property of an npn transisto
     \label{circuit:1c}
 \end{figure} 
 
-For this part of the lab, we used a 2N3904 npn transistor. Before looking at the current gain, we used a digital multimeter on the diode setting to show that a transistor behaves like two diodes. We were able to measure voltage drops across the \"diodes\" on either side of the transistor (base-emitter and collector-base drops) as well as the drop across the entire transistor (collector-emitter drop).\\
+For this part of the lab, we used a 2N3904 npn transistor. Before looking at the current gain, we used a digital multimeter on the diode setting to show that a transistor behaves like two diodes. We were able to measure voltage drops across the "diodes" on either side of the transistor (base-emitter and collector-base drops) as well as the drop across the entire transistor (collector-emitter drop).\\
 
 Next, as a point of comparison for our current gain, we used the DMM on the transistor gain setting to measure our transistor on its own.\\
 
@@ -51,7 +51,7 @@ So, we expect a plot of $I_c$ versus $I_b$ to be a line with slope $\beta$, wher
 
 \subsection{Results}
 
-In measuring the \"diode\" drop voltages across parts of the transistor, we found the following: \\
+In measuring the "diode" drop voltages across parts of the transistor, we found the following: \\
 
 \begin{center}
     \begin{tabular}[H]{ | l | c | }
@@ -92,7 +92,7 @@ In this case, if I wanted to characterize this transistor for a larger project, 
 \section{Emitter-Follower}
 \subsection{Introduction}
 
-In the second part of this lab, we used an emitter-follower circuit to examine the bias of our transistor, and how that affects a given input signal. We also used a couple of more complicated circuits to look at different kinds of signal \"clipping\" that can happen, and the limiting factors that lead to that clipping.\\
+In the second part of this lab, we used an emitter-follower circuit to examine the bias of our transistor, and how that affects a given input signal. We also used a couple of more complicated circuits to look at different kinds of signal "clipping" that can happen, and the limiting factors that lead to that clipping.\\
 
 Bias in a transistor is the current or voltage necessary for the transistor to operate normally--that is, for the transistor to perform consistently as a switch or current-limiting device. In this case we focused on the base bias, a voltage applied to the base of the transistor that induces current flow between the collector and emitter.\\
 
@@ -169,11 +169,46 @@ The clipping effects we observed throughout this part of the lab were very consi
 \section{Transistor Switch}
 \subsection{Introduction}
 
+In the third part of the lab, we simply add a light-emitting diode to our simple transistor circuit to show how the transistor can be used as an electronic switch. The LED enabled us to see visually when current was flowing through the circuit, and when it was not.\\
+
 \subsection{Experimental}
+
+The transistor acts as a switch because of it's forward bias--the threshold where the base voltage is high enough to allow current to flow from the collector to the emitter. This ties back into the concept of the depletion layer, and how it takes a certain voltage to open up a channel for current to flow across the p-n junctions inside the transistor.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Diagrams/c-3.png}
+    \caption{The circuit for part 3 includes the same npn transistor as in part 1. It also uses an LED as a visual cue for current flow through the collector.}
+    \label{circuit:3}
+\end{figure}
+
+Using the circuit above, we recorded the peak-to-peak input voltage at which the LED started to emit light for a range of frequencies. These measurements gives a general impression of the forward bias of the transistor over that range of frequencies.\\
 
 \subsection{Results}
 
+\begin{center}
+    \begin{tabular}[H]{ | l | c | }
+        \hline
+        Input Frequency (Hz) & Forward Bias (mV) \\ \hline
+        10 & 600 \\ \hline
+        100 & 600 \\ \hline
+        1 k & 600 \\ \hline
+        100 k & 600 \\ \hline
+        1 M & 700 \\ \hline
+        10 M & 2200 \\ \hline
+        12.5 M & 2900 \\ \hline
+    \end{tabular}
+\end{center}
+
+We found that at frequencies higher than $1\ M \Omega$, the forward bias increased dramatically. I suspect that the transistor has a kind of  characteristic time, similar to that of capacitors and inductors--at sufficiently high frequencies, the transistor does not have time to "switch on" before it's bias changes and it is forced to "switch off" again.\\
+
+As a result, very high frequencies require very high biases in order to activate the transistor and allow current to flow.\\
+
 \subsection{Conclusion}
+
+While I'm not positive about my explanation of why the transistor's bias increases dramatically at very high frequencies, it's clear that this could have a significant impact on a circuit containing transistors.\\
+
+In general, it seems safe to assume that the forward bias of a transistor is not necessarily constant with frequency.\\
 
 
 \end{document}

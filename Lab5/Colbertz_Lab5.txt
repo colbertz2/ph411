@@ -125,21 +125,31 @@ The clipping effects we observed throughout this part of the lab were very consi
 
 ## INTRODUCTION ##
 
-    Stuff.
+In the third part of the lab, we simply add a light-emitting diode to our simple transistor circuit to show how the transistor can be used as an electronic switch. The LED enabled us to see visually when current was flowing through the circuit, and when it was not.
 
 
 ## EXPERIMENTAL ##
 
-    Stuff.
+The transistor acts as a switch because of it's forward bias--the threshold where the base voltage is high enough to allow current to flow from the collector to the emitter. This ties back into the concept of the depletion layer, and how it takes a certain voltage to open up a channel for current to flow across the p-n junctions inside the transistor.
+
+FIGURE: c-3.png
+
+Using the circuit above, we recorded the peak-to-peak input voltage at which the LED started to emit light for a range of frequencies. These measurements gives a general impression of the forward bias of the transistor over that range of frequencies.
 
 
 ## RESULTS ##
 
-    Stuff.
+TABLE
+
+We found that at frequencies higher than 1 MEGAOHM, the forward bias increased dramatically. I suspect that the transistor has a kind of  characteristic time, similar to that of capacitors and inductors--at sufficiently high frequencies, the transistor does not have time to "switch on" before it's bias changes and it is forced to "switch off" again.
+
+As a result, very high frequencies require very high biases in order to activate the transistor and allow current to flow.
 
 
 ## CONCLUSION ##
 
-    Stuff.
+While I'm not positive about my explanation of why the transistor's bias increases dramatically at very high frequencies, it's clear that this could have a significant impact on a circuit containing transistors.
+
+In general, it seems safe to assume that the forward bias of a transistor is not necessarily constant with frequency.
 
 
