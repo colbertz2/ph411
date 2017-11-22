@@ -82,7 +82,7 @@ Signal clipping took on a few different forms in this lab. For one circuit, all 
 
 ## EXPERIMENTAL ##
 
-With the emitter-follower circuit, our input and output signals were connected to a common ground. We used a sine wave input, and slowly increased the amplitude of the input signal until we could measure an output signal with an oscilloscope. 
+With the emitter-follower circuit, our input and output signals were connected to a common ground. We used a sine wave input, and slowly increased the amplitude of the input signal until we could measure an output signal with an oscilloscope. This minimum input voltage is called the forward bias.
 
 Using the math functions on the oscilloscope, we found a waveform representing the difference between the input and output signals to illustrate the signal clipping in a qualitative way.
 
@@ -102,17 +102,20 @@ For the emitter-follower circuit, we found that our input signal had to have a p
 The math function of the oscilloscope was particularly useful for showing the difference between the input and output signals. We were able to see, as we increased the amplitude of the input signal, that the output signal is always clipped at the same amplitude, around 700 MILLIVOLTS.
 
 FIGURE: fig2a.png
+NOTE: 2N3906 is a pnp transistor, with its emitter oriented toward the emitter of the 2N3904
 
 Using circuit FIGURE: c-2bl.png our output signal looked exactly like the input signal, shifted down about 600 MILLIVOLTS (voltage offset). With a scope probe we found that the output signal was offset like this after crossing the 5 KILOHM resistor on the transistor base. We also found that by changing the -15 VOLTS near the transistor emitter to ground, the output signal was clipped similar to the circuit FIGURE: c-2.png
 
-SOMETHING ABOUT THE OTHER CIRCUIT???
+Circuit FIGURE: c-2br.png had an interesting effect on the input signal. Peaks and troughs of the wave were clipped to about 700 MILLIVOLTS, but clipped from the middle of the wave (about zero volts) instead of from the maxima.
 
-This shows that the emitter and collector voltages affect the way a signal is clipped when passing through a transistor. 
+This shows that the emitter and collector voltages affect the way a signal is clipped when passing through a transistor. Specifically, it appears that npn transistors clip negative regions of the signal where the emitter voltage is zero, and pnp resistors clip positive regions under the same conditions. The combination of these effects is the wave shown in FIGURE: c-2br.png
 
 
 ## CONCLUSION ##
 
-    Stuff.
+While it's clear up to this point that transistors are very useful as current-limiting devices and electronic switches, it's now clear that the voltages surrounding a transistor play significant roles in how a signal passing through the device is changed.
+
+The clipping effects we observed throughout this part of the lab were very consistent, including the 700 MILLIVOLT value that signals were clipped to. I have not yet been able to use that value to relate the clipped signals to the forward bias of the transistor, but suspect there is some relationship there.
 
 
 ================================================================================
