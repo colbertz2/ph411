@@ -92,11 +92,77 @@ In this case, if I wanted to characterize this transistor for a larger project, 
 \section{Emitter-Follower}
 \subsection{Introduction}
 
+In the second part of this lab, we used an emitter-follower circuit to examine the bias of our transistor, and how that affects a given input signal. We also used a couple of more complicated circuits to look at different kinds of signal \"clipping\" that can happen, and the limiting factors that lead to that clipping.\\
+
+Bias in a transistor is the current or voltage necessary for the transistor to operate normally--that is, for the transistor to perform consistently as a switch or current-limiting device. In this case we focused on the base bias, a voltage applied to the base of the transistor that induces current flow between the collector and emitter.\\
+
+Signal clipping took on a few different forms in this lab. For one circuit, all the negative portions of the signal were completely suppressed. For another, peaks and troughs in the signal appeared to be trimmed from the middle, with a flat region mid-way up a wave. We'll examine these waveforms more closely in the Results section.\\
+
 \subsection{Experimental}
+
+With the emitter-follower circuit, our input and output signals were connected to a common ground. We used a sine wave input, and slowly increased the amplitude of the input signal until we could measure an output signal with an oscilloscope. This minimum input voltage is called the forward bias.\\
+
+Using the math functions on the oscilloscope, we found a waveform representing the difference between the input and output signals to illustrate the signal clipping in a qualitative way.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/c-2.png}
+    \caption{Simple emitter-follower circuit, with the same npn transistor used in part 1.}
+    \label{circuit:2}
+\end{figure}
+
+With our more complicated circuits, we looked for some limiting factors that lead to signal clipping. For either circuit, we did a lot of work with an oscilloscope probe to find voltage drop across individual elements, but ultimately found our best results by changing the emitter voltage and examining the resultant waveforms.\\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[scale=0.6]{Diagrams/c-2bL.png}
+        \caption{Similar to the simple emitter-follower circuit above, with an additional resistor on the transistor base and a constant emitter-side voltage of $-15\ V$ instead of a grounded emitter.}
+        \label{circuit:2bL}
+    \end{subfigure}
+    %
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[scale=0.6]{Diagrams/c-2bR.png}
+        \caption{A little more complex circuit, which includes a pnp transistor connected emitter-to-emitter with the npn transistor from previous circuits.}
+        \label{circuit:2bR}
+    \end{subfigure}
+\end{figure}
+
+No new theory applies to this part of the lab. Our observations mostly relied on simple Kirchoff analysis of circuits.\\
 
 \subsection{Results}
 
+For the emitter-follower circuit, we found that our input signal had to have a peak-to-peak voltage of at least $700\ mV$. Below that amplitude, there was no measurable output signal.\\
+
+The math function of the oscilloscope was particularly useful for showing the difference between the input and output signals. We were able to see, as we increased the amplitude of the input signal, that the output signal is always clipped at the same amplitude, around $700\ mV$.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Plots/fig2a.png}
+    \caption{The difference between the output and input signals for the simple emitter-follower circuit. This waveform was taken from the math (difference) function of our oscilloscope.}
+    \label{fig:2a}
+\end{figure}
+
+Using circuit \ref{circuit:2bL} our output signal looked exactly like the input signal, shifted down about $600\ mV$ (voltage offset). With a scope probe we found that the output signal was offset like this after crossing the $5\ k \Omega$ resistor on the transistor base. We also found that by changing the $-15\ V$ near the transistor emitter to ground, the output signal was clipped similar to circuit \ref{circuit:2}.\\
+
+Circuit \ref{circuit:2bR} had an interesting effect on the input signal. Peaks and troughs of the wave were clipped to about $700\ mV$, but clipped from the middle of the wave (about zero volts) instead of from the maxima.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Plots/fig2b.png}
+    \caption{The final circuit for part 2 showed some interesting effects--the combination of clipping by the npn and pnp transistors, respectively.}
+    \label{fig:2b}
+\end{figure}
+
+This shows that the emitter and collector voltages affect the way a signal is clipped when passing through a transistor. Specifically, it appears that npn transistors clip negative regions of the signal where the emitter voltage is zero, and pnp resistors clip positive regions under the same conditions. The combination of these effects is the wave shown in figure \ref{fig:2b}.\\
+
 \subsection{Conclusion}
+
+While it's clear up to this point that transistors are very useful as current-limiting devices and electronic switches, it's now clear that the voltages surrounding a transistor play significant roles in how a signal passing through the device is changed.\\
+
+The clipping effects we observed throughout this part of the lab were very consistent, including the $700\ mV$ value that signals were clipped to. I have not yet been able to use that value to relate the clipped signals to the forward bias of the transistor, but suspect there is some relationship there.\\
 
 %%% PART 3 %%%
 
