@@ -43,12 +43,46 @@ We found that the circuit was far too sensitive to changes in the input signal f
 
 ## EXPERIMENTAL ##
 
-Experimental for part2.
+One of the features of an op-amp is its two inputs--called the inverting and non-inverting inputs. In contrast with part 1, in part 2 we ground the non-inverting input and the circuit with a signal at the inverting input. As the name suggests, signals at this input are inverted at the output of the amplifier.
+
+CIRCUIT: c-b.png
+
+Now that the circuit includes a feedback loop (in the form of a 10 KILOHM resistor between the output and inverting input), we're required to do a little bit of extra analysis to find the expected output gain.
+
+The second op-amp rule tells us that the inputs draw no current--so all of the current flowing through the 1 KILOHM resistor must also be flowing through the 10 KILOHM resistor. 
+
+MATH: I_1k = I_10k
+
+By applying Ohm's Law, we find that
+
+MATH: VIN - V_INVERTING / R_1k = V_INVERTING - VOUT / R_10k
+
+The first op-amp rule tells us that the difference between the inputs should be zero. Since the non-inverting input is grounded, we must assume that the circuit will react to make the voltage at the inverting input zero. Then,
+
+MATH: VIN / R_1k = -VOUT / R_10k
+
+MATH: VOUT = -R_10k / R_1k * VIN = -10 KILOHM / 1 KILOHM * VIN
+
+MATH: VOUT = -10 VIN IMPLIES BETA = -10
+
+This negative-valued gain also confirms that we expect the output signal to be inverse of the input signal.
 
 
 ## RESULTS ##
 
-Results or part2.
+For a 10 Hz sine wave input, and powering the op-amp with PLUSMINUS 20 DC VOLTS, we measured VIN = 2.20 VOLTS peak-to-peak, and VOUT = 19.4 VOLTS peak-to-peak for a gain of 8.82. The output signal was also inverted, consistent with a negative (inverting) gain.
+
+By returning our op-amp power to PLUSMINUS 15 DC VOLTS, we found that the maximum output voltage swing was about 15 VOLTS, consistent with what we saw in the first part of the lab. 
+
+PLOT: OUTPUT SIGNAL RESTRICTED BY VOLTAGE SWING
+
+In observing the frequency-dependent behaviors of the output signal, we began to see some interesting effects at freqencies of 100 KHZ, 1 MHZ, and 5 MHZ:
+
+TABLE: Theory Gain | Frequency | Output Type | Phase Shift? | DC Offset? | Measured Gain
+
+From these observations it appears that as the theoretical gain of the circuit increases (effectively, as the impedances grow larger), the phase shift and DC offset of the input signal increase. At higher frequencies, we see the output signal become smaller and more distorted.
+
+It seems to me that the phase shift is a result of the input signal (or possibly the feedback signal) is passing through a resistor, and is "slowed down." The DC offset could be the result of a voltage difference across the resistor in the feedback loop, which is effectively a DC voltage added to the AC signal resulting in an amplitude shift. The distortion and diminished output gain are a little harder to explain.
 
 
 ================================================================================
