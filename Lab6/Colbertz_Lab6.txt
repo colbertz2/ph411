@@ -3,7 +3,14 @@
 ********************************************************************************
 
 ## INTRODUCTION ##
-Introduction for the whole lab.
+
+Operational Amplifiers (op-amps) are active, voltage-amplifying devices. They come in the form of an integrated circuit, with 8-pins in the case of this lab. Two pins are used to power the op-amp with constant DC voltages, two are used as the "inverting" and "non-inverting" inputs, one is the output, and three others have more advanced functions.
+
+A single op-amp may behave in very different ways based on feedback from passive devices in the circuit around it, and in this lab we take a look at some common circuit configurations to show different features of an op-amp. Because they are very complicated integrated circuits, and because their behavior changes based on feedback from other devices, we use two "Golden Rules" to define reliable behaviors of op-amps. These rules are used in conjunction with Kirchoff rules to analyze circuits that employ op-amps.
+
+Rule 1 says that "the output does whatever it must to keep the voltage difference between the two inputs zero." (CITE THE LAB DESCRIPTION?) This means that as the two inputs change, the output will also change in a way that minimizes the voltage difference between the inputs. This has to do with the feedback-response of op-amps.
+
+Rule 2 says that "the inputs draw no current." In reality, op-amps are made to have very high impedance inputs, so that they draw as little current as possible. These rules, combined with Kirchoff's circuit rules, turn out to be very useful when analyzing circuits with op-amps later.
 
 
 ================================================================================
@@ -12,12 +19,22 @@ Introduction for the whole lab.
 
 ## EXPERIMENTAL ##
 
-Experimental for part1.
+For this lab, we used a LM741 op-amp, and a data sheet from Texas Instruments (CITE: http://www.ti.com/lit/ds/symlink/lm741.pdf). The literature value for the output gain of this op-amp is 200 VOLTS/MILLIVOLT, or 200,000 VOUT/VIN. This output gain is commonly referred to as BETA, a dimensionless coefficient:
+
+MATH: VOUT = BETA * VIN
+
+In this part of the lab, we observe the output of our op-amp with a simple DC input signal. The signal is controlled by a potentiometer (voltage divider) with a 30 VOLT drop.
+
+CIRCUIT: c-a.png
+
+With no feedback loop and one of the inputs grounded, we expect to see an exceptionally large output signal (based on the exceptionally large output gain) that changes proportionally to changes in the input signal. By equation (VOUT = BETA * VIN), only a zero input signal could result in a zero output signal.
 
 
 ## RESULTS ##
 
-Results or part1.
+Using circuit (REF: c-a) we find that very small changes to the input signal cause the output signal to hit its limits at PLUSMINUS 15 VOLTS. This is consistent with the very large output gain we expect from this op-amp, and the output signal was consistently capped at PLUSMINUS 15 VOLTS as expected based on our constant power supply to the amplifier.
+
+We found that the circuit was far too sensitive to changes in the input signal for us to make an attempt at adjusting it manually to 0 VOLTS. Instead, by connecting both inputs to a common ground (reducing the voltage difference between them to 0), we found that the output signal also went to 0 VOLTS as expected.
 
 
 ================================================================================
@@ -26,12 +43,46 @@ Results or part1.
 
 ## EXPERIMENTAL ##
 
-Experimental for part2.
+One of the features of an op-amp is its two inputs--called the inverting and non-inverting inputs. In contrast with part 1, in part 2 we ground the non-inverting input and the circuit with a signal at the inverting input. As the name suggests, signals at this input are inverted at the output of the amplifier.
+
+CIRCUIT: c-b.png
+
+Now that the circuit includes a feedback loop (in the form of a 10 KILOHM resistor between the output and inverting input), we're required to do a little bit of extra analysis to find the expected output gain.
+
+The second op-amp rule tells us that the inputs draw no current--so all of the current flowing through the 1 KILOHM resistor must also be flowing through the 10 KILOHM resistor. 
+
+MATH: I_1k = I_10k
+
+By applying Ohm's Law, we find that
+
+MATH: VIN - V_INVERTING / R_1k = V_INVERTING - VOUT / R_10k
+
+The first op-amp rule tells us that the difference between the inputs should be zero. Since the non-inverting input is grounded, we must assume that the circuit will react to make the voltage at the inverting input zero. Then,
+
+MATH: VIN / R_1k = -VOUT / R_10k
+
+MATH: VOUT = -R_10k / R_1k * VIN = -10 KILOHM / 1 KILOHM * VIN
+
+MATH: VOUT = -10 VIN IMPLIES BETA = -10
+
+This negative-valued gain also confirms that we expect the output signal to be inverse of the input signal.
 
 
 ## RESULTS ##
 
-Results or part2.
+For a 10 Hz sine wave input, and powering the op-amp with PLUSMINUS 20 DC VOLTS, we measured VIN = 2.20 VOLTS peak-to-peak, and VOUT = 19.4 VOLTS peak-to-peak for a gain of 8.82. The output signal was also inverted, consistent with a negative (inverting) gain.
+
+By returning our op-amp power to PLUSMINUS 15 DC VOLTS, we found that the maximum output voltage swing was about 15 VOLTS, consistent with what we saw in the first part of the lab. 
+
+PLOT: OUTPUT SIGNAL RESTRICTED BY VOLTAGE SWING
+
+In observing the frequency-dependent behaviors of the output signal, we began to see some interesting effects at freqencies of 100 KHZ, 1 MHZ, and 5 MHZ:
+
+TABLE: Theory Gain | Frequency | Output Type | Phase Shift? | DC Offset? | Measured Gain
+
+From these observations it appears that as the theoretical gain of the circuit increases (effectively, as the impedances grow larger), the phase shift and DC offset of the input signal increase. At higher frequencies, we see the output signal become smaller and more distorted.
+
+It seems to me that the phase shift is a result of the input signal (or possibly the feedback signal) is passing through a resistor, and is "slowed down." The DC offset could be the result of a voltage difference across the resistor in the feedback loop, which is effectively a DC voltage added to the AC signal resulting in an amplitude shift. The distortion and diminished output gain are a little harder to explain.
 
 
 ================================================================================

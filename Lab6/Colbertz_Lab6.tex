@@ -12,203 +12,299 @@
 
 %Header-Make sure you update this information!!!!
 \noindent
-\large\textbf{Lab 5} \hfill \textbf{Zach Colbert} \\
-\normalsize PH 411 \hfill 21 November 2017\\
+\large\textbf{Lab 6} \hfill \textbf{Zach Colbert} \\
+\normalsize PH 411 \hfill 28 November 2017\\
 
-\section{Transistor Basics}
-\subsection{Introduction}
+\section*{Introduction}
+Operational Amplifiers (op-amps) are active, voltage-amplifying devices. They come in the form of an integrated circuit, with 8-pins in the case of this lab. Two pins are used to power the op-amp with constant DC voltages, two are used as the "inverting" and "non-inverting" inputs, one is the output, and three others have more advanced functions.\\
 
-Transistors are active elements--they control current by means of a "base" signal, separate from the main signal passing through. Junctions between semiconductors make this possible, where electron-hole pairs come together to form a charge imbalance called the "depletion zone," effectively a barrier which prevents electrons from flowing across the junction.\\
+A single op-amp may behave in very different ways based on feedback from passive devices in the circuit around it, and in this lab we take a look at some common circuit configurations to show different features of an op-amp. Because they are very complicated integrated circuits, and because their behavior changes based on feedback from other devices, we use two "Golden Rules" to define reliable behaviors of op-amps. These rules are used in conjunction with Kirchoff rules to analyze circuits that employ op-amps.\\
 
-By applying some current to the base of the transistor, connected to the middle semiconductor, we suppress the depletion zones enough to open a kind of channel for current to flow through.\\
+Rule 1 says that "the output does whatever it must to keep the voltage difference between the two inputs zero."\footnote{From the lab description.} This means that as the two inputs change, the output will also change in a way that minimizes the voltage difference between the inputs. This has to do with the feedback-response of op-amps.\\
 
-In addition to acting as electronic switches, starting and stopping current with a small base signal, transistors come with some current gain--by which the input signal is amplified with a still small base singal.\\
+Rule 2 says that "the inputs draw no current."\footnote{Also from the lab description.} In reality, op-amps are made to have very high impedance inputs, so that they draw as little current as possible. These rules, combined with Kirchoff's circuit rules, turn out to be very useful when analyzing circuits with op-amps later.\\
 
-In part 1 of this lab, we examine this current gain property of an npn transistor, by two different methods.\\
 
+\section{Open Loop Gain}
 \subsection{Experimental}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.4]{Diagrams/c-1c.png}
-    \caption{Simple circuit with an npn transitor.}
-    \label{circuit:1c}
-\end{figure} 
-
-For this part of the lab, we used a 2N3904 npn transistor. Before looking at the current gain, we used a digital multimeter on the diode setting to show that a transistor behaves like two diodes. We were able to measure voltage drops across the "diodes" on either side of the transistor (base-emitter and collector-base drops) as well as the drop across the entire transistor (collector-emitter drop).\\
-
-Next, as a point of comparison for our current gain, we used the DMM on the transistor gain setting to measure our transistor on its own.\\
-
-Finally, for a little more comprehensive look at the behavior of the transistor over a range of currents, we built the transistor into a circuit and measured the base and collector currents individually.\\
-
-In the above circuit, we used a $1\ M \Omega$ potentiometer to manually adjust the base current, and compared that to the collector current over many samples (keeping the respective input voltages at the collector and base constant throughout). Our theoretical model for the current gain says:
+For this lab, we used a LM741 op-amp, and a data sheet from Texas Instruments \footnote{Datasheet: http://www.ti.com/lit/ds/symlink/lm741.pdf}. The literature value for the output gain of this op-amp is $200\ \frac{V}{mV}$, or $200,000\ \frac{V_{Out}}{V_{In}}$. This output gain is commonly referred to as $\beta$, a dimensionless coefficient:\\
 
 \begin{equation}
-I_c = \beta I_b
-\end{equation} 
+    V_{Out} = \beta V_{In}
+    \label{eqn:simpleGain}
+\end{equation}
 
-So, we expect a plot of $I_c$ versus $I_b$ to be a line with slope $\beta$, where $\beta$ is the current gain of the transistor.\\
+In this part of the lab, we observe the output of our op-amp with a simple DC input signal. The signal is controlled by a potentiometer (voltage divider) with a $30\ V$ drop.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-a.png}
+    \caption{Op-amp in a simple circuit, with no feedback loop. The potentiometer on the left serves as a variable DC voltage source.}
+    \label{circuit:a}
+\end{figure}
+
+With no feedback loop and one of the inputs grounded, we expect to see an exceptionally large output signal (based on the exceptionally large output gain) that changes proportionally to changes in the input signal. By equation \ref{eqn:simpleGain}, only a zero input signal could result in a zero output signal.\\
+
 
 \subsection{Results}
 
-In measuring the "diode" drop voltages across parts of the transistor, we found the following: \\
+Using circuit \ref{circuit:a} we find that very small changes to the input signal cause the output signal to hit its limits at $\pm 15\ V$. This is consistent with the very large output gain we expect from this op-amp, and the output signal was consistently capped at $\pm 15\ V$ as expected based on our constant power supply to the amplifier.\\
 
+We found that the circuit was far too sensitive to changes in the input signal for us to make an attempt at adjusting it manually to $0\ V$. Instead, by connecting both inputs to a common ground (reducing the voltage difference between them to 0), we found that the output signal also went to $0\ V$ as expected.\\
+
+
+\section{Inverting Amplifier}
+\subsection{Experimental}
+
+One of the features of an op-amp is its two inputs--called the inverting and non-inverting inputs. In contrast with part 1, in part 2 we ground the non-inverting input and the circuit with a signal at the inverting input. As the name suggests, signals at this input are inverted at the output of the amplifier.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-b.png}
+    \caption{In this circuit, the input signal is fed to the inverting input, and there is a feedback loop between the output and inverting input.}
+    \label{circuit:b}
+\end{figure}
+
+Now that the circuit includes a feedback loop (in the form of a $10\ k \Omega$ resistor between the output and inverting input), we're required to do a little bit of extra analysis to find the expected output gain.\\
+
+The second op-amp rule tells us that the inputs draw no current--so all of the current flowing through the $1\ k \Omega$ resistor must also be flowing through the $10\ k \Omega$ resistor. \\
+
+% MATH: I_1k = I_10k
+\begin{equation}
+    I_{1k} = I_{10k}
+\end{equation}
+
+By applying Ohm's Law, we find that\\
+
+% MATH: VIN - V_INVERTING / R_1k = V_INVERTING - VOUT / R_10k
+\begin{equation}
+    \frac{V_{In} - V_{-}}{R_{1k}} = \frac{V_{-} - V_{Out}}{R_{10k}}
+\end{equation}
+
+The first op-amp rule tells us that the difference between the inputs should be zero. Since the non-inverting input is grounded, we must assume that the circuit will react to make the voltage at the inverting input zero. Then,\\
+
+% MATH: VIN / R_1k = -VOUT / R_10k
+\begin{equation}
+    \frac{V_{In}}{R_{1k}} = \frac{-V_{Out}}{R_{10k}}
+\end{equation}
+
+% MATH: VOUT = -R_10k / R_1k * VIN = -10 KILOHM / 1 KILOHM * VIN
+\begin{equation}
+    V_{Out} = \frac{-R_{10k}}{R_{1k}} V_{In} = \frac{-10\ k \Omega}{1\ k \Omega} V_{In}
+\end{equation}
+
+% MATH: VOUT = -10 VIN IMPLIES BETA = -10
+\begin{equation}
+    V_{Out} = -10\ V_{In} \Longrightarrow \beta = -10
+\end{equation}
+
+This negative-valued gain also confirms that we expect the output signal to be inverse of the input signal.\\
+
+
+\subsection{Results}
+
+For a $10\ Hz$ sine wave input, and powering the op-amp with $\pm 20\ V_{DC}$, we measured $V_{In} = 2.20\ V$ peak-to-peak, and $V_{Out} = 19.4\ V$ peak-to-peak for a gain of $8.82$. The output signal was also inverted, consistent with a negative (inverting) gain.\\
+
+By returning our op-amp power to $\pm 15\ V_{DC}$, we found that the maximum output voltage swing was about $15\ V$, consistent with what we saw in the first part of the lab. \\
+
+% PLOT: OUTPUT SIGNAL RESTRICTED BY VOLTAGE SWING
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{Plots/figB.png}
+    \caption{The flat regions at the peaks of the output signal show how the voltage swing is restricted by the DC voltage used to power the op-amp.}
+    \label{fig:b}
+\end{figure}
+
+In observing the frequency-dependent behaviors of the output signal, we began to see some interesting effects at freqencies of $100\ kHz$, $1\ MHz$, and $5\ MHz$:\\
+
+% TABLE: Theory Gain | Frequency | Output Type | Phase Shift? | DC Offset? | Measured Gain
 \begin{center}
-    \begin{tabular}[H]{ | l | c | }
+    \begin{tabular}[H]{ | c | c | c | c | c | c | }
         \hline
-        Base-Emitter & $0.665\ V$ \\ \hline
-        Collector-Base & $0.646\ V$ \\ \hline
-        Emitter-Collector & $0\ V$ \\ \hline
+        Theory Gain & Input Frequency & Output Waveform & Phase Shifted? & DC Offset & Exp. Gain \\ \hline
+        -10 & 100 kHz & Triangle & Yes & 0 & \textless 10 \\ \hline
+        & 1 MHz & Triangle & Yes & Down & \textless 1 \\ \hline
+        & 5 MHz & Sawtooth & Yes & Down & \textless 1 \\ \hline
+        -100 & 100 kHz & Sine & Yes & Up & \textless 100 \\ \hline
+        & 1 MHz & Sine & Yes & Up & \approx 1 \\ \hline
+        & 5 MHz & Sine & Yes & Up & \textless 1 \\ \hline
+        -1000 & 100 kHz & Sine & Yes & Up & \textless 1000 \\ \hline
+        & 1 MHz & Signal too fuzzy & & & \\ \hline
+        & 5 MHz & Signal too fuzzy & & & \\ \hline
     \end{tabular}
 \end{center}
 
-The first two measurements showed us that current flows one way through each side of the transistor, just like current flows one way through a diode. The third showed the current-controlling function of the transistor--without a base current, no current flows between the collector and emitter.\\
+From these observations it appears that as the theoretical gain of the circuit increases (effectively, as the impedances grow larger), the phase shift and DC offset of the input signal increase. At higher frequencies, we see the output signal become smaller and more distorted.\\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.4]{Plots/fig1.png}
-    \caption{Current gain of an npn transistor, measured via various methods.}
-    \label{fig:1}
-\end{figure}
+It seems to me that the phase shift is a result of the input signal (or possibly the feedback signal) is passing through a resistor, and is "slowed down." The DC offset could be the result of a voltage difference across the resistor in the feedback loop, which is effectively a DC voltage added to the AC signal resulting in an amplitude shift. The distortion and diminished output gain are a little harder to explain.\\
 
-With the DMM on transistor mode, we measured a current gain $\beta = 112$, shown in green on Figure \ref{fig:1}.\\
 
-Our manually measured gain was incredibly consistent, following a distinct line until about $60\ \mu A$ base current. At that point it curved away and became shallow--By some simple analysis of the circuit, this appears to be a maximum for the collector current. \\
-
-That final point lies at about $15\ mA$ collector current. Through a $1\ k \Omega$ resistor, that current results in a $15\ V$ drop between the constant collector voltage $V_{cc}$ and the collector. Not only is that the maximum voltage that can be passed to the collector, it causes the collector voltage to be 0, equal to the emitter voltage. This breaks one of the fundamental rules for normal operation of a transistor.\\
-
-I added a couple of different linear fits to the plot--the line in blue represents a linear fit across all of the data. The line in red represents a linear fit across a select range of data, excluding the points above $60\ \mu A$ base current.\\
-
-The inclusive linear fit represents a current gain of 144, and the exclusive linear fit represents a current gain of 167. I haven't found a good explanation for the difference between these values and the one measured by the DMM initially, but they seem to be reasonably close to each other (at least, within an order of magnitude).\\
-
-\subsection{Conclusion}
-
-There are clear differences between the values measured for current gain in this part of the lab, but it seems reasonable to assume that measurements exclusively made by the DMM are not the most accurate.\\
-
-In this case, if I wanted to characterize this transistor for a larger project, I would tend to choose the current gain found by making a linear fit in the region where the data appears to be linear. Then, at least it is clear what the current gain is for that region, and my larger circuit can be constrained to fit the parameters for normal operation of the transistor.\\
-    
-%%% PART 2 %%%
-
-\section{Emitter-Follower}
-\subsection{Introduction}
-
-In the second part of this lab, we used an emitter-follower circuit to examine the bias of our transistor, and how that affects a given input signal. We also used a couple of more complicated circuits to look at different kinds of signal "clipping" that can happen, and the limiting factors that lead to that clipping.\\
-
-Bias in a transistor is the current or voltage necessary for the transistor to operate normally--that is, for the transistor to perform consistently as a switch or current-limiting device. In this case we focused on the base bias, a voltage applied to the base of the transistor that induces current flow between the collector and emitter.\\
-
-Signal clipping took on a few different forms in this lab. For one circuit, all the negative portions of the signal were completely suppressed. For another, peaks and troughs in the signal appeared to be trimmed from the middle, with a flat region mid-way up a wave. We'll examine these waveforms more closely in the Results section.\\
-
+\section{Non-Inverting Amplifier}
 \subsection{Experimental}
 
-With the emitter-follower circuit, our input and output signals were connected to a common ground. We used a sine wave input, and slowly increased the amplitude of the input signal until we could measure an output signal with an oscilloscope. This minimum input voltage is called the forward bias.\\
+In the part 3 of the lab, we use a circuit very similar to the one in part 2. Here, there are a couple of fundamental differences:\\
 
-Using the math functions on the oscilloscope, we found a waveform representing the difference between the input and output signals to illustrate the signal clipping in a qualitative way.\\
-
+% CIRCUIT: c-c.png
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{Diagrams/c-2.png}
-    \caption{Simple emitter-follower circuit, with the same npn transistor used in part 1.}
-    \label{circuit:2}
+    \includegraphics[scale=0.5]{Diagrams/c-c.png}
+    \caption{Non-inverting amplifier circuit, with negative feedback.}
+    \label{circuit:c}
 \end{figure}
 
-With our more complicated circuits, we looked for some limiting factors that lead to signal clipping. For either circuit, we did a lot of work with an oscilloscope probe to find voltage drop across individual elements, but ultimately found our best results by changing the emitter voltage and examining the resultant waveforms.\\
+First and foremost, the circuit is non-inverting because we feed the input signal to the non-inverting input. We can verify this by calculating the expected gain of the circuit using the op-amp rules and Kirchoff's rules.\\
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \includegraphics[scale=0.6]{Diagrams/c-2bL.png}
-        \caption{Similar to the simple emitter-follower circuit above, with an additional resistor on the transistor base and a constant emitter-side voltage of $-15\ V$ instead of a grounded emitter.}
-        \label{circuit:2bL}
-    \end{subfigure}
-    %
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \includegraphics[scale=0.6]{Diagrams/c-2bR.png}
-        \caption{A little more complex circuit, which includes a pnp transistor connected emitter-to-emitter with the npn transistor from previous circuits.}
-        \label{circuit:2bR}
-    \end{subfigure}
-\end{figure}
+By the first rule, we know that the input voltages will be equal. We also know from the circuit diagram that the voltage at the non-inverting input will be equal to the voltage of the input signal:\\
 
-No new theory applies to this part of the lab. Our observations mostly relied on simple Kirchoff analysis of circuits.\\
+\begin{equation}
+    V_{-} = V_{+} = V_{In}
+\end{equation}
+
+We can also relate $V_{In}$ and $V_{Out}$ by using the voltage drop across the $10\ k \Omega$ resistor:\\
+
+\begin{equation}
+    V_{In} = V_{Out} - V_{10k}
+\end{equation}
+
+\begin{equation}
+    V_{In} = V_{Out} - I R_{10k}
+\end{equation}
+
+After applying Ohm's Law, it's necessary to find the current through the $10\ k \Omega$ resistor. Fortunately, the second op-amp rule tells us that there is no current flowing to the inverting input--then, by Kirchoff's junction rule, the current through the $10\ k \Omega$ resistor must be the same as the current flowing through the $1\ k \Omega$ resistor. \\
+
+Then, using the voltage drop across that resistor:\\
+
+\begin{equation}
+    V_{In} - V_{1k} = 0
+\end{equation}
+
+\begin{equation}
+    V_{In} = V_{1k} = I R_{1k} \Longrightarrow I = \frac{V_{In}}{R_{1k}}
+\end{equation}
+
+We can then use this definition for $I$ in the relationship between $V_{In}$ and $V_{Out}$:\\
+
+\begin{equation}
+    V_{In} = V_{Out} - V_{In} \frac{R_{10k}}{R_{1k}}
+\end{equation}
+
+\begin{equation}
+    V_{Out} = V_{In} (1 + \frac{R_{10k}}{R_{1k}})
+\end{equation}
+
+\begin{equation}
+    \beta = 1 + \frac{10\ k \Omega}{1\ k \Omega} = 11
+\end{equation}
+
+A positive gain indicates that the output we observe should not be inverted.\\
+
+The other key difference between this circuit and the one from part 2 is that the resistors remain on the inverting side of the op-amp. Now, instead of forcing the input signal and feedback to flow on the same side of the circuit, they are flowing on opposite sides.\\
+
 
 \subsection{Results}
 
-For the emitter-follower circuit, we found that our input signal had to have a peak-to-peak voltage of at least $700\ mV$. Below that amplitude, there was no measurable output signal.\\
+Driving the circuit with a $1\ V$ peak-to-peak sine wave at $100\ Hz$, we measured $V_{In} = 2.2\ V$ peak-to-peak, $V_{Out} = 22.6\ V$ peak-to-peak, resulting in a gain of $\beta = 10.3$. This is reasonably close to the theoretical gain, $\beta = 11$.\\
 
-The math function of the oscilloscope was particularly useful for showing the difference between the input and output signals. We were able to see, as we increased the amplitude of the input signal, that the output signal is always clipped at the same amplitude, around $700\ mV$.\\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.4]{Plots/fig2a.png}
-    \caption{The difference between the output and input signals for the simple emitter-follower circuit. This waveform was taken from the math (difference) function of our oscilloscope.}
-    \label{fig:2a}
-\end{figure}
-
-Using circuit \ref{circuit:2bL} our output signal looked exactly like the input signal, shifted down about $600\ mV$ (voltage offset). With a scope probe we found that the output signal was offset like this after crossing the $5\ k \Omega$ resistor on the transistor base. We also found that by changing the $-15\ V$ near the transistor emitter to ground, the output signal was clipped similar to circuit \ref{circuit:2}.\\
-
-Circuit \ref{circuit:2bR} had an interesting effect on the input signal. Peaks and troughs of the wave were clipped to about $700\ mV$, but clipped from the middle of the wave (about zero volts) instead of from the maxima.\\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.4]{Plots/fig2b.png}
-    \caption{The final circuit for part 2 showed some interesting effects--the combination of clipping by the npn and pnp transistors, respectively.}
-    \label{fig:2b}
-\end{figure}
-
-This shows that the emitter and collector voltages affect the way a signal is clipped when passing through a transistor. Specifically, it appears that npn transistors clip negative regions of the signal where the emitter voltage is zero, and pnp resistors clip positive regions under the same conditions. The combination of these effects is the wave shown in figure \ref{fig:2b}.\\
-
-\subsection{Conclusion}
-
-While it's clear up to this point that transistors are very useful as current-limiting devices and electronic switches, it's now clear that the voltages surrounding a transistor play significant roles in how a signal passing through the device is changed.\\
-
-The clipping effects we observed throughout this part of the lab were very consistent, including the $700\ mV$ value that signals were clipped to. I have not yet been able to use that value to relate the clipped signals to the forward bias of the transistor, but suspect there is some relationship there.\\
-
-%%% PART 3 %%%
-
-\section{Transistor Switch}
-\subsection{Introduction}
-
-In the third part of the lab, we simply add a light-emitting diode to our simple transistor circuit to show how the transistor can be used as an electronic switch. The LED enabled us to see visually when current was flowing through the circuit, and when it was not.\\
-
+\section{Follower}
 \subsection{Experimental}
 
-The transistor acts as a switch because of it's forward bias--the threshold where the base voltage is high enough to allow current to flow from the collector to the emitter. This ties back into the concept of the depletion layer, and how it takes a certain voltage to open up a channel for current to flow across the p-n junctions inside the transistor.\\
+For part 4, we use a very simple circuit called a follower. In this case, there are no resistors or grounded inputs involved--just negative feedback. This makes analysis of the circuit fairly simple.\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.4]{Diagrams/c-3.png}
-    \caption{The circuit for part 3 includes the same npn transistor as in part 1. It also uses an LED as a visual cue for current flow through the collector.}
-    \label{circuit:3}
+    \includegraphics[scale=0.5]{Diagrams/c-d.png}
+    \caption{Simple follower circuit with a negative feedback loop.}
+    \label{circuit:d}
 \end{figure}
 
-Using the circuit above, we recorded the peak-to-peak input voltage at which the LED started to emit light for a range of frequencies. These measurements gives a general impression of the forward bias of the transistor over that range of frequencies.\\
+The first rule tells us that the input voltages will be equal:\\
+
+\begin{equation}
+    V_{+} = V_{-}
+\end{equation}
+
+From the circuit diagram, we can tell that the voltage of the input signal and the voltage of the output signal, respectively, will be equal to those input voltages:\\
+
+\begin{equation}
+    V_{In} = V_{Out} \Longrightarrow \beta = 1
+\end{equation}
+
+So, we expect the output signal to look exactly like the input signal.\\
+
 
 \subsection{Results}
 
-\begin{center}
-    \begin{tabular}[H]{ | l | c | }
-        \hline
-        Input Frequency (Hz) & Forward Bias (mV) \\ \hline
-        10 & 600 \\ \hline
-        100 & 600 \\ \hline
-        1 k & 600 \\ \hline
-        100 k & 600 \\ \hline
-        1 M & 700 \\ \hline
-        10 M & 2200 \\ \hline
-        12.5 M & 2900 \\ \hline
-    \end{tabular}
-\end{center}
+Driving the circuit with a $500\ mV$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable difference between the input and output signals. This indicates a circuit gain of 1, as expected.\\
 
-We found that at frequencies higher than $1\ M \Omega$, the forward bias increased dramatically. I suspect that the transistor has a kind of  characteristic time, similar to that of capacitors and inductors--at sufficiently high frequencies, the transistor does not have time to "switch on" before it's bias changes and it is forced to "switch off" again.\\
 
-As a result, very high frequencies require very high biases in order to activate the transistor and allow current to flow.\\
+\section{Summing Amplifier}
+\subsection{Experimental}
 
-\subsection{Conclusion}
+In the final part of the lab, we use an inverting amplifier circuit to add AC and DC input signals together. As in part 1, here we use a potentiometer as a voltage divider, which allows us to vary the DC voltage that we add to our AC input signal.\\
 
-While I'm not positive about my explanation of why the transistor's bias increases dramatically at very high frequencies, it's clear that this could have a significant impact on a circuit containing transistors.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-e.png}
+    \caption{The summing amplifier circuit.}
+    \label{circuit:e}
+\end{figure}
 
-In general, it seems safe to assume that the forward bias of a transistor is not necessarily constant with frequency.\\
+Finding the circuit gain turns out to be a little different this time, because we're effectively working with two different inputs. Starting on the left side of the circuit, we can observe that the currents from our respective input signals combine at the leftmost junction, and meet another junction at the inverting input of the op-amp. Since the second op-amp rule tells us that the inputs draw no current, Kirchoff's junction rule tells us that the sum of the two input currents is equal to the current in the feedback loop:\\
+
+\begin{equation}
+    I_1 + I_2 = I_f
+    \label{eqn:e-jxn}
+\end{equation}
+
+Using the voltage drop across the resistor in the feedback loop, we can relate the current $I_f$ to our known output voltage $V_{Out}$:\\
+
+\begin{equation}
+    V_{-} - I_f R_{10k} = V_{Out}
+\end{equation}
+
+The first op-amp rule tells us that the input voltages will be the same, so $V_{-}$ goes to zero (as $V_{+}$ is grounded):\\
+
+\begin{equation}
+    I_f = \frac{-V_{Out}}{R_{10k}}
+\end{equation}
+
+Then, we can use this new equation to apply Ohm's law to equation \ref{eqn:e-jxn}:\\
+
+\begin{equation}
+    \frac{-V_{Out}}{R_{10k}} = \frac{V_1}{R_1} + \frac{V_2}{R_2}
+\end{equation}
+
+\begin{equation}
+    V_{Out} = -R_f (\frac{V_1}{R_1} + \frac{V_2}{R_2})
+\end{equation}
+
+This shows that there are individual gains for each of the input signals, based on the ratio of feedback resistance to input resistance. For this circuit in particular, we find the respective gains to be:\\
+
+\begin{equation}
+    \beta_{AC} = \frac{-R_f}{R_1} = \frac{-10\ k \Omega}{10\ k \Omega} = -1
+\end{equation}
+
+\begin{equation}
+    \beta_{DC} = \frac{-R_f}{R_2} = \frac{-10\ k \Omega}{15\ k \Omega} = - \frac{2}{3}
+\end{equation}
+
+So, we expect the output signal to be inverted, with a DC offset of $-2/3$ the DC input voltage.\\
+
+
+\subsection{Results}
+
+Driving the circuit with a $1\ V$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable gain in the output signal. It was inverted, and had a DC offset that changed proportionally with adjustments to the potentiometer.\\
+
+As in previous parts of the lab, the output signal was cut off near $\pm 15\ V$, based on the constant DC voltage used to power the op-amp (in other words, the output voltage swing is within the range we have found it throughout the lab). Overall, the output signal behaved as expected.\\
+
+
+\section{Conclusion}
+
+Throughout this lab, we found op-amps to behave very consistently with theory at reasonably low frequencies. As with any other circuit element, it seems reasonable to expect strange effects at very high frequencies, so that will be a notable point to remember when employing op-amps in circuits in the future.\\
+
+The two golden rules for op-amps make them very easy to analyze in a complex circuit, which makes them very convenient devices for controlling and amplifying voltage in complex ways.\\
 
 
 \end{document}
