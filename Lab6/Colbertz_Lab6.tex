@@ -15,7 +15,7 @@
 \large\textbf{Lab 6} \hfill \textbf{Zach Colbert} \\
 \normalsize PH 411 \hfill 28 November 2017\\
 
-\section{Introduction}
+\section*{Introduction}
 Operational Amplifiers (op-amps) are active, voltage-amplifying devices. They come in the form of an integrated circuit, with 8-pins in the case of this lab. Two pins are used to power the op-amp with constant DC voltages, two are used as the "inverting" and "non-inverting" inputs, one is the output, and three others have more advanced functions.\\
 
 A single op-amp may behave in very different ways based on feedback from passive devices in the circuit around it, and in this lab we take a look at some common circuit configurations to show different features of an op-amp. Because they are very complicated integrated circuits, and because their behavior changes based on feedback from other devices, we use two "Golden Rules" to define reliable behaviors of op-amps. These rules are used in conjunction with Kirchoff rules to analyze circuits that employ op-amps.\\
@@ -28,7 +28,7 @@ Rule 2 says that "the inputs draw no current."\footnote{Also from the lab descri
 \section{Open Loop Gain}
 \subsection{Experimental}
 
-For this lab, we used a LM741 op-amp, and a data sheet from Texas Instruments \footnote{http://www.ti.com/lit/ds/symlink/lm741.pdf}. The literature value for the output gain of this op-amp is $200\ \frac{V}{mV}$, or $200,000\ \frac{V_{Out}}{V_{In}}$. This output gain is commonly referred to as $\beta$, a dimensionless coefficient:\\
+For this lab, we used a LM741 op-amp, and a data sheet from Texas Instruments \footnote{Datasheet: http://www.ti.com/lit/ds/symlink/lm741.pdf}. The literature value for the output gain of this op-amp is $200\ \frac{V}{mV}$, or $200,000\ \frac{V_{Out}}{V_{In}}$. This output gain is commonly referred to as $\beta$, a dimensionless coefficient:\\
 
 \begin{equation}
     V_{Out} = \beta V_{In}
@@ -130,8 +130,8 @@ In observing the frequency-dependent behaviors of the output signal, we began to
         & 1 MHz & Sine & Yes & Up & \approx 1 \\ \hline
         & 5 MHz & Sine & Yes & Up & \textless 1 \\ \hline
         -1000 & 100 kHz & Sine & Yes & Up & \textless 1000 \\ \hline
-        & 1 MHz & Signal too fuzzy to record data & & & \\ \hline
-        & 5 MHz & Signal too fuzzy to record data & & & \\ \hline
+        & 1 MHz & Signal too fuzzy & & & \\ \hline
+        & 5 MHz & Signal too fuzzy & & & \\ \hline
     \end{tabular}
 \end{center}
 
@@ -143,7 +143,7 @@ It seems to me that the phase shift is a result of the input signal (or possibly
 \section{Non-Inverting Amplifier}
 \subsection{Experimental}
 
-In the part 3 of the lab, we use a circuit very similar to the one in part 2. Here, there are a couple of fundamental differences:
+In the part 3 of the lab, we use a circuit very similar to the one in part 2. Here, there are a couple of fundamental differences:\\
 
 % CIRCUIT: c-c.png
 \begin{figure}[H]
@@ -153,15 +153,15 @@ In the part 3 of the lab, we use a circuit very similar to the one in part 2. He
     \label{circuit:c}
 \end{figure}
 
-First and foremost, the circuit is non-inverting because we feed the input signal to the non-inverting input. We can verify this by calculating the expected gain of the circuit using the op-amp rules and Kirchoff's rules.
+First and foremost, the circuit is non-inverting because we feed the input signal to the non-inverting input. We can verify this by calculating the expected gain of the circuit using the op-amp rules and Kirchoff's rules.\\
 
-By the first rule, we know that the input voltages will be equal. We also know from the circuit diagram that the voltage at the non-inverting input will be equal to the voltage of the input signal:
+By the first rule, we know that the input voltages will be equal. We also know from the circuit diagram that the voltage at the non-inverting input will be equal to the voltage of the input signal:\\
 
 \begin{equation}
     V_{-} = V_{+} = V_{In}
 \end{equation}
 
-We can also relate $V_{In}$ and $V_{Out}$ by using the voltage drop across the $10\ k \Omega$ resistor:
+We can also relate $V_{In}$ and $V_{Out}$ by using the voltage drop across the $10\ k \Omega$ resistor:\\
 
 \begin{equation}
     V_{In} = V_{Out} - V_{10k}
@@ -171,9 +171,9 @@ We can also relate $V_{In}$ and $V_{Out}$ by using the voltage drop across the $
     V_{In} = V_{Out} - I R_{10k}
 \end{equation}
 
-After applying Ohm's Law, it's necessary to find the current through the $10\ k \Omega$ resistor. Fortunately, the second op-amp rule tells us that there is no current flowing to the inverting input--then, by Kirchoff's junction rule, the current through the $10\ k \Omega$ resistor must be the same as the current flowing through the $1\ k \Omega$ resistor. 
+After applying Ohm's Law, it's necessary to find the current through the $10\ k \Omega$ resistor. Fortunately, the second op-amp rule tells us that there is no current flowing to the inverting input--then, by Kirchoff's junction rule, the current through the $10\ k \Omega$ resistor must be the same as the current flowing through the $1\ k \Omega$ resistor. \\
 
-Then, using the voltage drop across that resistor:
+Then, using the voltage drop across that resistor:\\
 
 \begin{equation}
     V_{In} - V_{1k} = 0
@@ -183,7 +183,7 @@ Then, using the voltage drop across that resistor:
     V_{In} = V_{1k} = I R_{1k} \Longrightarrow I = \frac{V_{In}}{R_{1k}}
 \end{equation}
 
-We can then use this definition for $I$ in the relationship between $V_{In}$ and $V_{Out}$:
+We can then use this definition for $I$ in the relationship between $V_{In}$ and $V_{Out}$:\\
 
 \begin{equation}
     V_{In} = V_{Out} - V_{In} \frac{R_{10k}}{R_{1k}}
@@ -197,18 +197,51 @@ We can then use this definition for $I$ in the relationship between $V_{In}$ and
     \beta = 1 + \frac{10\ k \Omega}{1\ k \Omega} = 11
 \end{equation}
 
-A positive gain indicates that the output we observe should not be inverted.
+A positive gain indicates that the output we observe should not be inverted.\\
 
-The other key difference between this circuit and the one from part 2 is that the resistors remain on the inverting side of the op-amp. Now, instead of forcing the input signal and feedback to flow on the same side of the circuit, they are flowing on opposite sides.
+The other key difference between this circuit and the one from part 2 is that the resistors remain on the inverting side of the op-amp. Now, instead of forcing the input signal and feedback to flow on the same side of the circuit, they are flowing on opposite sides.\\
 
 
 \subsection{Results}
 
-Driving the circuit with a $1\ V$ peak-to-peak sine wave at $100\ Hz$, we measured $V_{In} = 2.2\ V$ peak-to-peak, $V_{Out} = 22.6\ V$ peak-to-peak, resulting in a gain of $\beta = 10.3$. This is reasonably close to the theoretical gain, $\beta = 11$.
+Driving the circuit with a $1\ V$ peak-to-peak sine wave at $100\ Hz$, we measured $V_{In} = 2.2\ V$ peak-to-peak, $V_{Out} = 22.6\ V$ peak-to-peak, resulting in a gain of $\beta = 10.3$. This is reasonably close to the theoretical gain, $\beta = 11$.\\
 
 
 \section{Follower}
 \subsection{Experimental}
+
+For part 4, we use a very simple circuit called a follower. In this case, there are no resistors or grounded inputs involved--just negative feedback. This makes analysis of the circuit fairly simple.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-d.png}
+    \caption{Simple follower circuit with a negative feedback loop.}
+    \label{circuit:d}
+\end{figure}
+
+The first rule tells us that the input voltages will be equal:\\
+
+\begin{equation}
+    V_{+} = V_{-}
+\end{equation}
+
+From the circuit diagram, we can tell that the voltage of the input signal and the voltage of the output signal, respectively, will be equal to those input voltages:
+
+\begin{equation}
+    V_{In} = V_{Out} \Longrightarrow \beta = 1
+\end{equation}
+
+So, we expect the output signal to look exactly like the input signal.
+
+
+\subsection{Results}
+
+Driving the circuit with a $500\ mV$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable difference between the input and output signals. This indicates a circuit gain of 1, as expected.
+
+
+\section{Summing Amplifier}
+\subsection{Experimental}
+
 
 
 \end{document}
