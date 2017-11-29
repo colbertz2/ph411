@@ -19,12 +19,22 @@ Rule 2 says that "the inputs draw no current." In reality, op-amps are made to h
 
 ## EXPERIMENTAL ##
 
-Experimental for part1.
+For this lab, we used a LM741 op-amp, and a data sheet from Texas Instruments (CITE: http://www.ti.com/lit/ds/symlink/lm741.pdf). The literature value for the output gain of this op-amp is 200 VOLTS/MILLIVOLT, or 200,000 VOUT/VIN. This output gain is commonly referred to as BETA, a dimensionless coefficient:
+
+MATH: VOUT = BETA * VIN
+
+In this part of the lab, we observe the output of our op-amp with a simple DC input signal. The signal is controlled by a potentiometer (voltage divider) with a 30 VOLT drop.
+
+CIRCUIT: c-a.png
+
+With no feedback loop and one of the inputs grounded, we expect to see an exceptionally large output signal (based on the exceptionally large output gain) that changes proportionally to changes in the input signal. By equation (VOUT = BETA * VIN), only a zero input signal could result in a zero output signal.
 
 
 ## RESULTS ##
 
-Results or part1.
+Using circuit (REF: c-a) we find that very small changes to the input signal cause the output signal to hit its limits at PLUSMINUS 15 VOLTS. This is consistent with the very large output gain we expect from this op-amp, and the output signal was consistently capped at PLUSMINUS 15 VOLTS as expected based on our constant power supply to the amplifier.
+
+We found that the circuit was far too sensitive to changes in the input signal for us to make an attempt at adjusting it manually to 0 VOLTS. Instead, by connecting both inputs to a common ground (reducing the voltage difference between them to 0), we found that the output signal also went to 0 VOLTS as expected.
 
 
 ================================================================================
