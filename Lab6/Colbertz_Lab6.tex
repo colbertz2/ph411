@@ -225,23 +225,86 @@ The first rule tells us that the input voltages will be equal:\\
     V_{+} = V_{-}
 \end{equation}
 
-From the circuit diagram, we can tell that the voltage of the input signal and the voltage of the output signal, respectively, will be equal to those input voltages:
+From the circuit diagram, we can tell that the voltage of the input signal and the voltage of the output signal, respectively, will be equal to those input voltages:\\
 
 \begin{equation}
     V_{In} = V_{Out} \Longrightarrow \beta = 1
 \end{equation}
 
-So, we expect the output signal to look exactly like the input signal.
+So, we expect the output signal to look exactly like the input signal.\\
 
 
 \subsection{Results}
 
-Driving the circuit with a $500\ mV$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable difference between the input and output signals. This indicates a circuit gain of 1, as expected.
+Driving the circuit with a $500\ mV$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable difference between the input and output signals. This indicates a circuit gain of 1, as expected.\\
 
 
 \section{Summing Amplifier}
 \subsection{Experimental}
 
+In the final part of the lab, we use an inverting amplifier circuit to add AC and DC input signals together. As in part 1, here we use a potentiometer as a voltage divider, which allows us to vary the DC voltage that we add to our AC input signal.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-e.png}
+    \caption{The summing amplifier circuit.}
+    \label{circuit:e}
+\end{figure}
+
+Finding the circuit gain turns out to be a little different this time, because we're effectively working with two different inputs. Starting on the left side of the circuit, we can observe that the currents from our respective input signals combine at the leftmost junction, and meet another junction at the inverting input of the op-amp. Since the second op-amp rule tells us that the inputs draw no current, Kirchoff's junction rule tells us that the sum of the two input currents is equal to the current in the feedback loop:\\
+
+\begin{equation}
+    I_1 + I_2 = I_f
+    \label{eqn:e-jxn}
+\end{equation}
+
+Using the voltage drop across the resistor in the feedback loop, we can relate the current $I_f$ to our known output voltage $V_{Out}$:\\
+
+\begin{equation}
+    V_{-} - I_f R_{10k} = V_{Out}
+\end{equation}
+
+The first op-amp rule tells us that the input voltages will be the same, so $V_{-}$ goes to zero (as $V_{+}$ is grounded):\\
+
+\begin{equation}
+    I_f = \frac{-V_{Out}}{R_{10k}}
+\end{equation}
+
+Then, we can use this new equation to apply Ohm's law to equation \ref{eqn:e-jxn}:\\
+
+\begin{equation}
+    \frac{-V_{Out}}{R_{10k}} = \frac{V_1}{R_1} + \frac{V_2}{R_2}
+\end{equation}
+
+\begin{equation}
+    V_{Out} = -R_f (\frac{V_1}{R_1} + \frac{V_2}{R_2})
+\end{equation}
+
+This shows that there are individual gains for each of the input signals, based on the ratio of feedback resistance to input resistance. For this circuit in particular, we find the respective gains to be:\\
+
+\begin{equation}
+    \beta_{AC} = \frac{-R_f}{R_1} = \frac{-10\ k \Omega}{10\ k \Omega} = -1
+\end{equation}
+
+\begin{equation}
+    \beta_{DC} = \frac{-R_f}{R_2} = \frac{-10\ k \Omega}{15\ k \Omega} = - \frac{2}{3}
+\end{equation}
+
+So, we expect the output signal to be inverted, with a DC offset of $-2/3$ the DC input voltage.\\
+
+
+\subsection{Results}
+
+Driving the circuit with a $1\ V$ peak-to-peak sine wave at $10\ Hz$, we could find no measurable gain in the output signal. It was inverted, and had a DC offset that changed proportionally with adjustments to the potentiometer.\\
+
+As in previous parts of the lab, the output signal was cut off near $\pm 15\ V$, based on the constant DC voltage used to power the op-amp (in other words, the output voltage swing is within the range we have found it throughout the lab). Overall, the output signal behaved as expected.\\
+
+
+\section{Conclusion}
+
+Throughout this lab, we found op-amps to behave very consistently with theory at reasonably low frequencies. As with any other circuit element, it seems reasonable to expect strange effects at very high frequencies, so that will be a notable point to remember when employing op-amps in circuits in the future.\\
+
+The two golden rules for op-amps make them very easy to analyze in a complex circuit, which makes them very convenient devices for controlling and amplifying voltage in complex ways.\\
 
 
 \end{document}
