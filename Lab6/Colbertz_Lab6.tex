@@ -140,6 +140,75 @@ From these observations it appears that as the theoretical gain of the circuit i
 It seems to me that the phase shift is a result of the input signal (or possibly the feedback signal) is passing through a resistor, and is "slowed down." The DC offset could be the result of a voltage difference across the resistor in the feedback loop, which is effectively a DC voltage added to the AC signal resulting in an amplitude shift. The distortion and diminished output gain are a little harder to explain.\\
 
 
+\section{Non-Inverting Amplifier}
+\subsection{Experimental}
+
+In the part 3 of the lab, we use a circuit very similar to the one in part 2. Here, there are a couple of fundamental differences:
+
+% CIRCUIT: c-c.png
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-c.png}
+    \caption{Non-inverting amplifier circuit, with negative feedback.}
+    \label{circuit:c}
+\end{figure}
+
+First and foremost, the circuit is non-inverting because we feed the input signal to the non-inverting input. We can verify this by calculating the expected gain of the circuit using the op-amp rules and Kirchoff's rules.
+
+By the first rule, we know that the input voltages will be equal. We also know from the circuit diagram that the voltage at the non-inverting input will be equal to the voltage of the input signal:
+
+\begin{equation}
+    V_{-} = V_{+} = V_{In}
+\end{equation}
+
+We can also relate $V_{In}$ and $V_{Out}$ by using the voltage drop across the $10\ k \Omega$ resistor:
+
+\begin{equation}
+    V_{In} = V_{Out} - V_{10k}
+\end{equation}
+
+\begin{equation}
+    V_{In} = V_{Out} - I R_{10k}
+\end{equation}
+
+After applying Ohm's Law, it's necessary to find the current through the $10\ k \Omega$ resistor. Fortunately, the second op-amp rule tells us that there is no current flowing to the inverting input--then, by Kirchoff's junction rule, the current through the $10\ k \Omega$ resistor must be the same as the current flowing through the $1\ k \Omega$ resistor. 
+
+Then, using the voltage drop across that resistor:
+
+\begin{equation}
+    V_{In} - V_{1k} = 0
+\end{equation}
+
+\begin{equation}
+    V_{In} = V_{1k} = I R_{1k} \Longrightarrow I = \frac{V_{In}}{R_{1k}}
+\end{equation}
+
+We can then use this definition for $I$ in the relationship between $V_{In}$ and $V_{Out}$:
+
+\begin{equation}
+    V_{In} = V_{Out} - V_{In} \frac{R_{10k}}{R_{1k}}
+\end{equation}
+
+\begin{equation}
+    V_{Out} = V_{In} (1 + \frac{R_{10k}}{R_{1k}})
+\end{equation}
+
+\begin{equation}
+    \beta = 1 + \frac{10\ k \Omega}{1\ k \Omega} = 11
+\end{equation}
+
+A positive gain indicates that the output we observe should not be inverted.
+
+The other key difference between this circuit and the one from part 2 is that the resistors remain on the inverting side of the op-amp. Now, instead of forcing the input signal and feedback to flow on the same side of the circuit, they are flowing on opposite sides.
+
+
+\subsection{Results}
+
+Driving the circuit with a $1\ V$ peak-to-peak sine wave at $100\ Hz$, we measured $V_{In} = 2.2\ V$ peak-to-peak, $V_{Out} = 22.6\ V$ peak-to-peak, resulting in a gain of $\beta = 10.3$. This is reasonably close to the theoretical gain, $\beta = 11$.
+
+
+\section{Follower}
+\subsection{Experimental}
 
 
 \end{document}
