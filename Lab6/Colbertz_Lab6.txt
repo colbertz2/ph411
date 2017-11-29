@@ -3,7 +3,14 @@
 ********************************************************************************
 
 ## INTRODUCTION ##
-Introduction for the whole lab.
+
+Operational Amplifiers (op-amps) are active, voltage-amplifying devices. They come in the form of an integrated circuit, with 8-pins in the case of this lab. Two pins are used to power the op-amp with constant DC voltages, two are used as the "inverting" and "non-inverting" inputs, one is the output, and three others have more advanced functions.
+
+A single op-amp may behave in very different ways based on feedback from passive devices in the circuit around it, and in this lab we take a look at some common circuit configurations to show different features of an op-amp. Because they are very complicated integrated circuits, and because their behavior changes based on feedback from other devices, we use two "Golden Rules" to define reliable behaviors of op-amps. These rules are used in conjunction with Kirchoff rules to analyze circuits that employ op-amps.
+
+Rule 1 says that "the output does whatever it must to keep the voltage difference between the two inputs zero." (CITE THE LAB DESCRIPTION?) This means that as the two inputs change, the output will also change in a way that minimizes the voltage difference between the inputs. This has to do with the feedback-response of op-amps.
+
+Rule 2 says that "the inputs draw no current." In reality, op-amps are made to have very high impedance inputs, so that they draw as little current as possible. These rules, combined with Kirchoff's circuit rules, turn out to be very useful when analyzing circuits with op-amps later.
 
 
 ================================================================================
