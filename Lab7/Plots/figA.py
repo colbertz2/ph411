@@ -23,7 +23,7 @@ plt.legend()
 plt.grid(True)
 
 plt.figure()
-plt.title("TL-071 Slew Distortion")
+plt.title("LM-741 Slew Distortion")
 plt.plot(time2 * 10**6, inSignal2, 'b', label="Input")
 plt.plot(time2 * 10**6, outSignal2, 'r', label="Output")
 plt.xlabel("Time (us)")
