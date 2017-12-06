@@ -179,13 +179,13 @@ We powered the first circuit with $\pm 15\ V$. By driving it with a small square
 
 By slowly adjusting the offset of the wave as it crosses $0\ V$, we observed some strange effects in the output signal. The signal was a kind of distorted triangle wave at $-15\ V$--wherever the input signal becomes negative, the output signal slopes up toward zero. Then, when the input signal cycles and is positive again, the output signal drops back down to $-15\ V$. We were unable to confirm this, but it seems like this could be related to the slew rate of the op-amp.\\
 
-For the second circuit, we observed a similar effect about $0\ V$. In this case, the slope of the output signal is much greater, and the signal actually swings from $+15\ V$ to $-15\ V$ as we expect a comparator to do for a square wave.
+For the second circuit, we observed a similar effect about $0\ V$. In this case, the slope of the output signal is much greater, and the signal actually swings from $+15\ V$ to $-15\ V$ as we expect a comparator to do for a square wave.\\
 
 
 \section{RC Oscillator}
 \subsection{Experimental}
 
-In the final part of the lab, we look at a special case in which the op-amp circuit has no input, but we can measure an output signal anyway.
+In the final part of the lab, we look at a special case in which the op-amp circuit has no input, but we can measure an output signal anyway.\\
 
 \begin{figure}[H]
     \centering
@@ -194,15 +194,15 @@ In the final part of the lab, we look at a special case in which the op-amp circ
     \label{circuit:f}
 \end{figure}
 
-Knowing that we'll measure some output signal and that it will oscillate, we can predict the frequency of that oscillation using the "golden rules" of op-amps, Kirchoff analysis of the circuit, and properties of the capacitor in the circuit.
+Knowing that we'll measure some output signal and that it will oscillate, we can predict the frequency of that oscillation using the "golden rules" of op-amps, Kirchoff analysis of the circuit, and properties of the capacitor in the circuit.\\
 
-Since we know we will measure some output signal, we'll say that $V_{Out}$ is known. Then, treating the $10\ k \Omega$ resistors as a voltage divider, we can find the voltage at the non-inverting input $V_+$:
+Since we know we will measure some output signal, we'll say that $V_{Out}$ is known. Then, treating the $10\ k \Omega$ resistors as a voltage divider, we can find the voltage at the non-inverting input $V_+$:\\
 
 \begin{equation}
     V_+ = \frac{R_1}{R_1 + R_2} V_{Out} = \frac{1}{2} V_{Out}
 \end{equation}
 
-By op-amp rules, we know that $V_+$ and $V_-$ will be the same. Again, we can use the math that describes a voltage divider--this time, to relate this known voltage and the known output voltage to find the frequency-dependent impedance of the capacitor.
+By op-amp rules, we know that $V_+$ and $V_-$ will be the same. Again, we can use the math that describes a voltage divider--this time, to relate this known voltage and the known output voltage to find the frequency-dependent impedance of the capacitor.\\
 
 \begin{equation}
     \frac{1}{2} V_{Out} = \frac{z_R}{z_R + z_C} V_{Out}
@@ -224,12 +224,26 @@ By op-amp rules, we know that $V_+$ and $V_-$ will be the same. Again, we can us
     \omega = \frac{1}{RC} = \frac{1}{100\ k \Omega * 0.1\ \mu F} = 100\ \frac{rad}{s}
 \end{equation}
 
-So, we expect the frequency of oscillation to be around $\frac{50}{\pi} Hz$.
+So, we expect the frequency of oscillation to be around $\frac{50}{\pi} Hz$.\\
 
 
 \subsection{Results}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Plots/figF.png}
+    \caption{Output signal of the RC oscillator circuit. The circuit has no input signal, but a very clear output that oscillates between $\pm 7.5\ V$.}
+    \label{fig:F}
+\end{figure}
 
+The output signal of circuit \ref{circuit:f} very clearly shows the curves we would expect to see for a charging/discharging capacitor. It appears that $V_{Out}$ steadily increases as the capacitor charges, constantly trying to keep the input voltages the same. Then, once $V_{Out}$ reaches $+7.5\ V$, the op-amp can't continue increasing $V_{Out}$--so, in order to keep the input voltages the same, it switches directions and causes the capacitor to charge the opposite way. \\
+
+The frequency of this oscillation that we measured with our oscilloscope is $41\ Hz$, off of our theoretical value by a factor. I'm not sure where that factor comes from, but my method for predicting the frequency of oscillation was different than the method some other students took.\\
+
+
+\section*{Conclusion}
+
+Once again, op-amps have proven to have consistent behavior and diverse applications. This week we learned how to apply the advanced functionality of op-amps to classic differentiator and integrator circuits, and how to overcome (or at least quantify) some of the limitations of op-amps. \\
 
 
 \end{document}
