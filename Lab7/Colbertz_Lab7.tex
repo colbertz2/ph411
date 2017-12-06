@@ -124,4 +124,112 @@ This DC offset is the result of charge building up in the capacitor--it charges 
 In the first circuit, the resistor has a much lower impedance than the capactitor, and prevents a large voltage from building up on the capacitor. Without the resistor, the voltage across the capacitor is directly related to the input signal and thus the DC gain appears to be about 1. \\
 
 
+\section{Differentiator}
+\subsection{Experimental}
+
+As in the last part of the lab, in part 4 we use a combination of passive elements with an op-amp to create a differentiator circuit.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-d.png}
+    \caption{A differentiator circuit comprised of a combination of passive elements and an op-amp.}
+    \label{circuit:d}
+\end{figure}
+
+This circuit is very similar to the previous one, but passes the input signal through a resistor and capacitor before getting to the point where it meets negative feedback.\\
+
+The differentiated input signals are known, so for this part we simply apply different input signals and compare to the differentiated signals we expect.\\
+
+
+\subsection{Results}
+
+Driving the circuit with a $1\ kHz$ input, a triangle wave resulted in a square wave output. This matches our expectations, because a triangle wave has a constant rate of change alternating positive and negative as it cycles. This is represented by the positive and negative constant values taken by a square wave as it cycles.\\
+
+The circuit behaved consistently for other types of input signals also. A square wave input resulted in sharp, localized spikes wherever the wave cycled (the "infinite" rate of change of a square wave at certain points). A sine wave resulted in a phase-shifted sine wave (or cosine wave).\\
+
+
+\section{Positive Feedback}
+\subsection{Experimental}
+
+Up until this point, we've exclusively used negative feedback to change the effect of an op-amp on our input signal. Essentially, we've been reducing the enormous gain of the op-amp to something more reasonable for our needs.\\
+
+For this part of the lab, we examine the effects of positive feedback. Conversely from negative feedback, positive feedback has the potential to increase the gain of our op-amp infinitely.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-e1.png}
+    \caption{This simple op-amp circuit is called a comparator. Essentially, it has such a high gain that nearly any positive or negative signal will come out at $\mp 15\ V$ for an op-amp powered with DC $\pm 15\ V$.}
+    \label{circuit:e1}
+\end{figure}
+
+By adding some positive feedback, we effectively make the gain much larger and have the ability to work with much smaller signals. \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-e2.png}
+    \caption{This comparator circuit can handle much smaller signals than circuit \ref{circuit:e1} because it has a much higher gain.}
+\end{figure}
+
+Since this circuit can operate normally with much smaller input signals, we expect it to be a better comparator in general (not just for small signals).\\
+
+
+\subsection{Results}
+
+We powered the first circuit with $\pm 15\ V$. By driving it with a small square wave at low frequency, with a large positive offset (so the whole wave is positive), the output was $-15\ V$ as expected. The same wave with large negative offset resulted in a $+15\ V$ output signal.\\
+
+By slowly adjusting the offset of the wave as it crosses $0\ V$, we observed some strange effects in the output signal. The signal was a kind of distorted triangle wave at $-15\ V$--wherever the input signal becomes negative, the output signal slopes up toward zero. Then, when the input signal cycles and is positive again, the output signal drops back down to $-15\ V$. We were unable to confirm this, but it seems like this could be related to the slew rate of the op-amp.\\
+
+For the second circuit, we observed a similar effect about $0\ V$. In this case, the slope of the output signal is much greater, and the signal actually swings from $+15\ V$ to $-15\ V$ as we expect a comparator to do for a square wave.
+
+
+\section{RC Oscillator}
+\subsection{Experimental}
+
+In the final part of the lab, we look at a special case in which the op-amp circuit has no input, but we can measure an output signal anyway.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Diagrams/c-f.png}
+    \caption{The circuit has no inputs, but has a measurable output signal.}
+    \label{circuit:f}
+\end{figure}
+
+Knowing that we'll measure some output signal and that it will oscillate, we can predict the frequency of that oscillation using the "golden rules" of op-amps, Kirchoff analysis of the circuit, and properties of the capacitor in the circuit.
+
+Since we know we will measure some output signal, we'll say that $V_{Out}$ is known. Then, treating the $10\ k \Omega$ resistors as a voltage divider, we can find the voltage at the non-inverting input $V_+$:
+
+\begin{equation}
+    V_+ = \frac{R_1}{R_1 + R_2} V_{Out} = \frac{1}{2} V_{Out}
+\end{equation}
+
+By op-amp rules, we know that $V_+$ and $V_-$ will be the same. Again, we can use the math that describes a voltage divider--this time, to relate this known voltage and the known output voltage to find the frequency-dependent impedance of the capacitor.
+
+\begin{equation}
+    \frac{1}{2} V_{Out} = \frac{z_R}{z_R + z_C} V_{Out}
+\end{equation}
+
+\begin{equation}
+    \frac{1}{2} = \frac{z_R}{z_R + z_C}
+\end{equation}
+
+\begin{equation}
+    2 z_R = z_R + z_C
+\end{equation}
+
+\begin{equation}
+    z_R = z_C = \frac{1}{\omega C}
+\end{equation}
+
+\begin{equation}
+    \omega = \frac{1}{RC} = \frac{1}{100\ k \Omega * 0.1\ \mu F} = 100\ \frac{rad}{s}
+\end{equation}
+
+So, we expect the frequency of oscillation to be around $\frac{50}{\pi} Hz$.
+
+
+\subsection{Results}
+
+
+
+
 \end{document}
