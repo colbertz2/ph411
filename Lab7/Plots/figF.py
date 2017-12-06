@@ -13,10 +13,14 @@ time, inSignal, outSignal = np.genfromtxt((dataPath + '/figF.csv'), unpack=True,
 R = 100 * 10**3
 C = 0.1 * 10**(-6)
 V_0 = 15 #V
-V_theory = V_0 * (1 - np.exp(-1 * time / (R * C))
+V_theory = V_0 * (1 - np.exp(-1 * time / (R * C)))
 
 plt.figure()
-plt.plot(time, inSignal)
+# plt.plot(time, inSignal)
 plt.plot(time, outSignal)
+plt.xlabel("Time (s)")
+plt.ylabel("Voltage (V)")
+plt.title("Output of RC Oscillator")
+plt.grid(True)
 
 plt.show()
